@@ -1,0 +1,112 @@
+\documentclass[12pt]{article}
+
+% ----- Paquetes -----
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+% ----- Datos -----
+\title{Informe en \LaTeX{} con Control de Versiones en GitHub}
+\author{Joaquin Alfonso Carrasco Duran}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% ----- Introducción -----
+\section{Introducción}
+En este informe se abordan los conceptos fundamentales de la Programación Orientada a Objetos (POO), incluyendo \textbf{herencia}, \textbf{clases abstractas}, \textbf{polimorfismo} e \textbf{interfaces}, junto con el concepto de \textbf{Method Resolution Order (MRO)} en Python. El trabajo se gestiona mediante Git y GitHub siguiendo buenas prácticas de control de versiones y convención de commits.
+
+% ----- Herencia -----
+\section{Herencia}
+La herencia permite que una clase (subclase) reutilice y extienda el comportamiento de otra (superclase).  
+\begin{verbatim}
+class Animal:
+    def hablar(self):
+        print("Sonido genérico")
+
+class Perro(Animal):
+    def hablar(self):
+        print("Guau!")
+
+p = Perro()
+p.hablar()  # Imprime: Guau!
+\end{verbatim}
+
+\textbf{Ventaja:} evita duplicar código y promueve la reutilización.
+
+% ----- Clases Abstractas -----
+\section{Clases Abstractas}
+Una clase abstracta define una estructura común, pero deja algunos métodos sin implementar.  
+\begin{verbatim}
+from abc import ABC, abstractmethod
+
+class Figura(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Circulo(Figura):
+    def __init__(self, radio):
+        self.radio = radio
+
+    def area(self):
+        return 3.14 * self.radio ** 2
+\end{verbatim}
+
+\textbf{Uso:} asegurar que las subclases implementen ciertos métodos.
+
+% ----- Polimorfismo -----
+\section{Polimorfismo}
+El polimorfismo permite usar un mismo método con distintos comportamientos según el tipo de objeto.  
+\begin{verbatim}
+def hacer_sonido(animal):
+    animal.hablar()
+
+hacer_sonido(Perro())
+hacer_sonido(Gato())
+\end{verbatim}
+
+\textbf{Idea:} un mismo mensaje produce diferentes resultados.
+
+% ----- Interfaces -----
+\section{Interfaces}
+En Python, las interfaces pueden simularse usando clases abstractas con solo métodos abstractos.  
+\begin{verbatim}
+class Enviable(ABC):
+    @abstractmethod
+    def enviar(self):
+        pass
+\end{verbatim}
+
+Una clase que implemente esta interfaz debe definir el método \texttt{enviar()}.
+
+% ----- Method Resolution Order (MRO) -----
+\section{Method Resolution Order (MRO)}
+El MRO define el orden en que Python busca métodos y atributos en las clases al usar herencia múltiple.
+
+Ejemplo:
+\begin{verbatim}
+class A: pass
+class B(A): pass
+class C(B): pass
+
+print(C.mro())
+\end{verbatim}
+
+\textbf{Resultado:} muestra la jerarquía lineal de búsqueda de métodos.
+
+% ----- Conclusión -----
+\section{Conclusión}
+El uso de POO junto con herramientas modernas como GitHub y \LaTeX{} potencia el desarrollo estructurado, reproducible y colaborativo de proyectos.
+
+\end{document}
